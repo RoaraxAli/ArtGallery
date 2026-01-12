@@ -1,0 +1,148 @@
+@model Project.Models.User
+@{
+    ViewData["Title"] = "Welcome - Art Gallery";
+    Layout = "_AuthLayout";
+}
+
+<div class="min-h-screen flex items-center justify-center py-12 px-4">
+    <div class="max-w-4xl w-full">
+        <form asp-action="Onboarding" method="post" id="onboardingForm">
+            
+            <div id="step1" class="space-y-12 animate-fade-in">
+                <div class="text-center">
+                    <h2 class="text-5xl font-black text-[var(--text-primary)] tracking-tighter mb-4">CHOOSE YOUR PATH</h2>
+                    <p class="text-[var(--text-secondary)] text-xl">How do you want to experience the gallery?</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="role-card group" onclick="selectRole('User')">
+                        <input type="radio" name="Role" value="User" id="roleUser" class="hidden" checked>
+                        <div class="h-full p-10 bg-[var(--bg-card)] border-2 border-[var(--glass-border)] rounded-[40px] transition-all duration-500 cursor-pointer group-hover:border-primary group-hover:shadow-[0_0_50px_rgba(var(--primary-rgb),0.2)] flex flex-col items-center text-center">
+                            <div class="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mb-8 transform transition-transform group-hover:scale-110 duration-500">
+                                <i class="bi bi-eye text-5xl text-primary"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold text-[var(--text-primary)] mb-4">Collector</h3>
+                            <p class="text-[var(--text-secondary)] leading-relaxed">Browse, bid on, and collect unique masterpieces from around the globe.</p>
+                            <div class="mt-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="bg-primary text-white px-6 py-2 rounded-full text-sm font-bold">Select Choice</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="role-card group" onclick="selectRole('Artist')">
+                        <input type="radio" name="Role" value="Artist" id="roleArtist" class="hidden">
+                        <div class="h-full p-10 bg-[var(--bg-card)] border-2 border-[var(--glass-border)] rounded-[40px] transition-all duration-500 cursor-pointer group-hover:border-primary group-hover:shadow-[0_0_50px_rgba(var(--primary-rgb),0.2)] flex flex-col items-center text-center">
+                            <div class="w-32 h-32 bg-secondary/10 rounded-full flex items-center justify-center mb-8 transform transition-transform group-hover:scale-110 duration-500">
+                                <i class="bi bi-palette text-5xl text-secondary"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold text-[var(--text-primary)] mb-4">Creator</h3>
+                            <p class="text-[var(--text-secondary)] leading-relaxed">Share your creations, host auctions, and build your digital art legacy.</p>
+                            <div class="mt-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="bg-secondary text-white px-6 py-2 rounded-full text-sm font-bold">Select Choice</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center pt-8">
+                    <button type="button" onclick="nextStep(2)" class="btn-premium px-12 py-4 text-xl font-bold rounded-2xl shadow-2xl shadow-primary/30">Next Step <i class="bi bi-arrow-right ml-2"></i></button>
+                </div>
+            </div>
+
+            
+            <div id="step2" class="hidden space-y-12 animate-fade-in">
+                <div class="text-center">
+                    <div class="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4">Step 2 of 2</div>
+                    <h2 class="text-5xl font-black text-[var(--text-primary)] tracking-tighter mb-4">PROFILE DETAILS</h2>
+                    <p class="text-[var(--text-secondary)] text-xl">Help us personalize your inspiration feed.</p>
+                </div>
+
+                <div class="bg-[var(--bg-card)] p-12 rounded-[40px] border border-[var(--glass-border)] shadow-2xl">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div class="space-y-8">
+                            <div>
+                                <label class="text-xs text-slate-500 uppercase font-black tracking-widest mb-3 block">Your Age</label>
+                                <input type="number" name="Age" required min="13" max="100" class="w-full bg-[var(--bg-surface-1)] border-b-2 border-[var(--glass-border)] focus:border-primary outline-none py-4 text-2xl text-[var(--text-primary)] transition-all font-bold" placeholder="24" />
+                            </div>
+
+                            <div>
+                                <label class="text-xs text-slate-500 uppercase font-black tracking-widest mb-3 block">Gender</label>
+                                <div class="flex flex-wrap gap-4">
+                                    <label class="gender-btn">
+                                        <input type="radio" name="Sex" value="Male" class="hidden" required>
+                                        <span class="px-6 py-3 rounded-xl border border-[var(--glass-border)] text-[var(--text-primary)] cursor-pointer inline-block transition-all hover:bg-white/5 font-bold">Male</span>
+                                    </label>
+                                    <label class="gender-btn">
+                                        <input type="radio" name="Sex" value="Female" class="hidden">
+                                        <span class="px-6 py-3 rounded-xl border border-[var(--glass-border)] text-[var(--text-primary)] cursor-pointer inline-block transition-all hover:bg-white/5 font-bold">Female</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-xs text-slate-500 uppercase font-black tracking-widest mb-3 block">Artistic Interests</label>
+                            <textarea name="Interests" required rows="6" class="w-full bg-[var(--bg-surface-1)] border-2 border-[var(--glass-border)] rounded-3xl p-6 focus:border-primary outline-none text-[var(--text-primary)] transition-all resize-none shadow-inner" placeholder="E.g. Surrealism, Digital Sculpting, Oil Paintings..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-6 mt-12 pt-12 border-t border-[var(--glass-border)]">
+                        <button type="button" onclick="nextStep(1)" class="px-8 py-4 text-[var(--text-secondary)] font-bold hover:text-[var(--text-primary)] transition-colors"><i class="bi bi-arrow-left mr-2"></i> Back</button>
+                        <button type="submit" class="flex-1 btn-premium py-4 text-xl font-bold rounded-2xl">Complete Registration</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .role-card input:checked + div {
+        border-color: var(--primary-color) !important;
+        background: rgba(var(--primary-rgb), 0.05) !important;
+    }
+    .role-card input:checked + div .bg-primary/10 {
+        background: var(--primary-color) !important;
+    }
+    .role-card input:checked + div i {
+        color: white !important;
+    }
+
+    .gender-btn input:checked + span {
+        background: var(--primary-color) !important;
+        border-color: var(--primary-color) !important;
+        color: white !important;
+        box-shadow: 0 10px 20px rgba(var(--primary-rgb), 0.2);
+    }
+
+    
+    .animate-fade-in {
+        animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @@keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<script>
+    function selectRole(role) {
+        if(role === 'User') {
+            document.getElementById('roleUser').checked = true;
+            document.getElementById('roleArtist').checked = false;
+        } else {
+            document.getElementById('roleUser').checked = false;
+            document.getElementById('roleArtist').checked = true;
+        }
+    }
+
+    function nextStep(step) {
+        if(step === 2) {
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.remove('hidden');
+        } else {
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step1').classList.remove('hidden');
+        }
+    }
+</script>
