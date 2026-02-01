@@ -19,13 +19,7 @@ namespace Project.Controllers
             ViewData["PriceSortParm"] = sortOrder == "price_asc" ? "price_desc" : "price_asc";
             ViewData["CurrentSort"] = sortOrder;
 
-            var isAdmin = HttpContext.Session.GetString("Role") == "Admin";
-    var products = _context.products.AsQueryable();
-
-    if (!isAdmin)
-    {
-        products = products.Where(p => p.IsApproved);
-    }
+    var products = _context.products.Where(p => p.IsApproved).AsQueryable();
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -48,7 +42,12 @@ namespace Project.Controllers
                     break;
             }
 
-            return View(products.ToList());
+            var list = products.ToList();
+            foreach (var item in list)
+            {
+                item.ArtistName = _context.users.Where(u => u.UserId == item.ArtistId).Select(u => u.Name).FirstOrDefault() ?? "Anonymous";
+            }
+            return View(list);
         }
 
         public IActionResult Details(int id)
@@ -57,6 +56,11 @@ namespace Project.Controllers
                 .Include(p => p.Reviews)
                 .ThenInclude(r => r.User)
                 .FirstOrDefault(p => p.Id == id);
+
+            if (product != null)
+            {
+                product.ArtistName = _context.users.Where(u => u.UserId == product.ArtistId).Select(u => u.Name).FirstOrDefault() ?? "Anonymous";
+            }
 
             if (product == null)
             {

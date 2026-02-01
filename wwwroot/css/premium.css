@@ -121,13 +121,14 @@ body {
 
 .glass {
     background: var(--glass-bg);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(12px) saturate(160%); /* Reduced blur from 20px */
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
     border: 1px solid var(--glass-border);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     border-radius: var(--border-radius-md);
     position: relative;
     overflow: hidden;
+    will-change: transform, opacity; /* Hardware acceleration */
 }
 
 .glass::before {
@@ -248,11 +249,12 @@ button.btn-premium:active,
 
 
 .glass-morphism {
-    backdrop-filter: blur(25px) saturate(180%);
-    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    backdrop-filter: blur(15px) saturate(160%); /* Reduced blur from 25px */
+    -webkit-backdrop-filter: blur(15px) saturate(160%);
     background: rgba(15, 17, 26, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    will-change: transform, opacity;
 }
 
 .text-gradient {
@@ -371,6 +373,8 @@ button.btn-premium:hover,
     height: 100%;
     object-fit: cover;
     transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 .product-card:hover img {

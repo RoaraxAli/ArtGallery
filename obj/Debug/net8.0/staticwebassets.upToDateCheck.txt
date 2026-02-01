@@ -5,6 +5,7 @@ wwwroot\images\about-feature.png
 wwwroot\images\ai\ai_1e3532f8-ca9e-4d6c-b6fe-c3db9fb8c5eb.jpg
 wwwroot\images\ai\ai_3215cfc8-8e42-415c-b367-111046d3c445.jpg
 wwwroot\images\ai\ai_3c827497-91bf-4381-b757-1c446b0bd6f4.jpg
+wwwroot\images\ai\ai_44dbb4c5-9375-42f7-9aa7-aa274390d0e6.jpg
 wwwroot\images\ai\ai_79e88da5-582e-4393-8f98-07714030b5b5.jpg
 wwwroot\images\ai\ai_b0abf6df-fd40-443e-8563-7fce15b910f7.jpg
 wwwroot\images\ai\ai_b2c0b792-75e3-4f5c-9121-8956e6e70c44.jpg
@@ -18,6 +19,7 @@ wwwroot\images\ai\idea_77e5c07e-705a-46ff-b6f0-b9d31c495281.jpg
 wwwroot\images\ai\idea_b86185d8-1ae7-4d70-acc6-74850c081938.jpg
 wwwroot\images\ai\idea_bc94011b-f8e7-4d79-b7a3-7623cd262046.jpg
 wwwroot\images\auth-bg.png
+wwwroot\images\avatars\06301317-11ea-4e95-8621-705f5a6347f8.png
 wwwroot\images\avatars\0ed6b23a-13dc-4414-b7c9-879e5c8e22f9.jpg
 wwwroot\images\avatars\1065c9f8-2076-4aec-ae29-51227f6708de.png
 wwwroot\images\avatars\1599289b-6d6a-4eb8-876e-0056ef48f438.png
@@ -67,15 +69,20 @@ wwwroot\images\cart_bg.png
 wwwroot\images\community-bg.png
 wwwroot\images\exhibitions\5adc92e0-b28b-4fbd-9073-b5bba2803811.png
 wwwroot\images\exhibitions\84bcdc7c-7cb0-4c6c-9000-8b6096b7f70b.jpg
+wwwroot\images\hero-3d.png
 wwwroot\images\hero-accent.png
 wwwroot\images\hero-main.png
 wwwroot\images\logo.PNG
 wwwroot\images\onboarding_bg.png
+wwwroot\images\products\1ee5113f-bf1d-4b28-b0e8-3728d50a6317.png
+wwwroot\images\products\51d6fbd3-98d1-4128-b776-67d67d96ab8d.png
+wwwroot\images\products\auction.png
 wwwroot\images\products\cart_bg.png
 wwwroot\images\products\community-bg.png
 wwwroot\images\products\images.jpg
 wwwroot\images\products\something.avif
 wwwroot\images\products\something.jpg
+wwwroot\images\products\test.png
 wwwroot\js\custom-cursor.js
 wwwroot\js\loader-animation.js
 wwwroot\js\navbar-logic.js

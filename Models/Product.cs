@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Project.Models
 {
@@ -6,8 +7,8 @@ namespace Project.Models
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
         public decimal Price { get; set; }
         public string? ImageUrl { get; set; }
 
@@ -21,6 +22,9 @@ namespace Project.Models
 
         public int? ArtistId { get; set; }
         public bool IsApproved { get; set; } = false;
+
+        [NotMapped]
+        public string? ArtistName { get; set; }
 
         public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
     }

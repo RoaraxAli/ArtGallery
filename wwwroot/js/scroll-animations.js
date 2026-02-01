@@ -4,19 +4,19 @@ const initScrollAnimations = () => {
     gsap.registerPlugin(ScrollTrigger);
 
     // Fade in and slide up for sections
-    const fadeUpElements = document.querySelectorAll('.product-card, .stat-card, .gallery-hero, section, .glass, .premium-container > div, .animate-on-scroll');
+    const fadeUpElements = document.querySelectorAll('.product-card, .stat-card, .animate-on-scroll');
 
     fadeUpElements.forEach((el) => {
         gsap.from(el, {
             scrollTrigger: {
                 trigger: el,
-                start: "top 85%",
+                start: "top 90%",
                 toggleActions: "play none none none"
             },
-            y: 50,
+            y: 30, // Reduced from 50 for subtlety and performance
             opacity: 0,
-            duration: 1,
-            ease: "expo.out",
+            duration: 0.8,
+            ease: "power2.out",
             clearProps: "all"
         });
     });

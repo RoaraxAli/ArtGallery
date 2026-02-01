@@ -82,7 +82,21 @@ document.addEventListener('DOMContentLoaded', () => {
        EYE FOLLOW CURSOR (INDEPENDENT)
     ========================== */
 
+    let mouseX = 0;
+    let mouseY = 0;
+    let ticking = false;
+
     document.addEventListener('mousemove', function (e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        if (!ticking) {
+            window.requestAnimationFrame(updateEyes);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    function updateEyes() {
         const eyes = document.querySelectorAll('.eye-socket');
 
         eyes.forEach(eye => {
@@ -93,16 +107,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
 
-            const dx = e.clientX - centerX;
-            const dy = e.clientY - centerY;
+            const dx = mouseX - centerX;
+            const dy = mouseY - centerY;
 
             const angle = Math.atan2(dy, dx);
             const maxMove = 4;
 
-            pupil.style.transform =
-                `translate(${Math.cos(angle) * maxMove}px, ${Math.sin(angle) * maxMove}px)`;
+            pupil.style.transform = `translate(${Math.cos(angle) * maxMove}px, ${Math.sin(angle) * maxMove}px)`;
         });
-    });
+        ticking = false;
+    }
 
 
     /* =========================

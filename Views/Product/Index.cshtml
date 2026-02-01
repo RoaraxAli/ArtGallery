@@ -70,14 +70,8 @@
                     {
                         <div class="product-card">
                             <div class="product-image-container">
-                                @if (!item.IsApproved)
-                                {
-                                    <div class="absolute top-4 left-4 z-10">
-                                        <span class="px-3 py-1 bg-amber-500/90 text-white text-[10px] font-black uppercase rounded-lg shadow-lg">Pending Approval</span>
-                                    </div>
-                                }
                                 @if(!string.IsNullOrEmpty(item.ImageUrl)) {
-                                     <img src="@item.ImageUrl" alt="@item.Name" />
+                                     <img src="@item.ImageUrl" alt="@item.Name" loading="lazy" />
                                 } else {
                                      <div class="w-full h-full bg-slate-900 flex items-center justify-center">
                                          <i class="bi bi-image text-4xl opacity-20"></i>
@@ -85,14 +79,17 @@
                                 }
                             </div>
                             <div class="p-6">
-                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h3 class="product-title mb-0">@item.Name</h3>
                                     <div class="product-price">$@item.Price</div>
+                                </div>
+                                <div class="text-[var(--primary-color)] text-[10px] uppercase font-black tracking-widest mb-3">
+                                    by @item.ArtistName
                                 </div>
                                 <p class="text-slate-500 text-sm line-clamp-2 mb-4">@item.Description</p>
                                 
                                 <div class="flex gap-2">
-                                    <a asp-action="Details" asp-route-id="@item.Id" target="_blank" class="btn-premium flex-1 text-center py-2 px-4 text-sm">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn-premium flex-1 text-center py-2 px-4 text-sm">
                                         <i class="bi bi-eye me-1"></i> View Details
                                     </a>
                                     @if (Context.Session.GetInt32("UserId") != null)

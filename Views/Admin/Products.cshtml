@@ -15,6 +15,7 @@
                 <th>Image</th>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Artist</th>
                 <th>Price</th>
                 <th>Actions</th>
             </tr>
@@ -39,6 +40,15 @@
                         }
                     </td>
                     <td data-label="Description" class="text-[var(--text-secondary)]" style="max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@item.Description</td>
+                    <td data-label="Artist">
+                        @{
+                            var artistName = (item.ArtistId != null) ? Model.FirstOrDefault()?.ArtistName ?? "Anonymous" : "Anonymous";
+                            // Wait, I should probably just fetch it or use a better way. 
+                            // Actually, I can use a subquery if I don't want to change the model/controller for this view.
+                            // But I already updated the model to have ArtistName [NotMapped].
+                        }
+                        @item.ArtistName
+                    </td>
                     <td data-label="Price" style="color: var(--primary-color); font-family: monospace; font-size: 1.1rem;">
                         @if(item.IsAuction && item.CurrentBid.HasValue) {
                             <div class="flex flex-col">

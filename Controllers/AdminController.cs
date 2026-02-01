@@ -169,12 +169,17 @@ namespace Project.Controllers
         {
             if (HttpContext.Session.GetString("Role") != "Admin") return RedirectToAction("Index", "Home");
             var products = _context.products.ToList();
+            foreach (var item in products)
+            {
+                item.ArtistName = _context.users.Where(u => u.UserId == item.ArtistId).Select(u => u.Name).FirstOrDefault() ?? "Anonymous";
+            }
             return View(products);
         }
 
         public IActionResult AddProduct()
         {
             if (HttpContext.Session.GetString("Role") != "Admin") return RedirectToAction("Index", "Home");
+            ViewBag.Artists = _context.users.Where(u => u.Role == "Artist" || u.Role == "User").ToList();
             return View();
         }
 
@@ -203,9 +208,10 @@ namespace Project.Controllers
                 product.IsApproved = true;
                 _context.products.Add(product);
                 _context.SaveChanges();
-                TempData["Success"] = "Project created successfully!";
+                TempData["Success"] = "Artwork created successfully!";
                 return RedirectToAction("Products");
             }
+            ViewBag.Artists = _context.users.Where(u => u.Role == "Artist" || u.Role == "User").ToList();
             return View(product);
         }
 
@@ -213,6 +219,7 @@ namespace Project.Controllers
         {
             if (HttpContext.Session.GetString("Role") != "Admin") return RedirectToAction("Index", "Home");
             var product = _context.products.Find(id);
+            ViewBag.Artists = _context.users.Where(u => u.Role == "Artist" || u.Role == "User").ToList();
             return View(product);
         }
 
@@ -241,9 +248,10 @@ namespace Project.Controllers
                 }
 
                 _context.SaveChanges();
-                TempData["Success"] = "Project updated successfully!";
+                TempData["Success"] = "Artwork updated successfully!";
                 return RedirectToAction("Products");
             }
+            ViewBag.Artists = _context.users.Where(u => u.Role == "Artist" || u.Role == "User").ToList();
             return View(product);
         }
 

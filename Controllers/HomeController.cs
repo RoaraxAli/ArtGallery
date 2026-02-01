@@ -25,12 +25,34 @@ namespace Project.Controllers
         public IActionResult Index()
         {
             ViewBag.Exhibitions = db.Exhibitions.Where(e => e.IsActive).OrderBy(e => e.Date).Take(3).ToList();
-            ViewBag.Artworks = db.products.Where(p => p.IsApproved).OrderByDescending(p => p.Id).Take(6).ToList();
+            var artworks = db.products.Where(p => p.IsApproved).OrderByDescending(p => p.Id).Take(6).ToList();
+            foreach (var art in artworks)
+            {
+                art.ArtistName = db.users.Where(u => u.UserId == art.ArtistId).Select(u => u.Name).FirstOrDefault() ?? "Unknown";
+            }
+            ViewBag.Artworks = artworks;
             return View();
         }
 
         public IActionResult AboutContact()
         {
+            return View();
+        }
+
+        public IActionResult Artists()
+        {
+            var artists = db.users
+                .Where(u => u.Role == "Artist" || u.Role == "User")
+                .Select(u => new {
+                    u.UserId,
+                    u.Name,
+                    u.Avatar,
+                    ArtworkCount = db.products.Count(p => p.ArtistId == u.UserId && p.IsApproved)
+                })
+                .Where(a => a.ArtworkCount > 0)
+                .ToList();
+
+            ViewBag.Artists = artists;
             return View();
         }
 
